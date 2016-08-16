@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Library</string>
+
+    <!-- install tip -->
+    <string name="installtip_tv">System is updating</string>
+    <string name="installapp_tv">%1$s Upgrading</string>
+    <string name="installapp_success">%1$s Upgrade successfully!</string>
+</resources>

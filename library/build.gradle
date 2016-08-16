@@ -1,0 +1,116 @@
+apply plugin: 'com.android.library'
+//加入retrolambda需要的plugin声明
+apply plugin: 'me.tatarka.retrolambda'//加入lambda 代码结构插件
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+    packagingOptions {
+//        exclude ' META-INF/rxjava.properties'
+//        exclude 'META-INF/DEPENDENCIES.txt'
+//        exclude 'META-INF/LICENSE.txt'
+//        exclude 'META-INF/NOTICE.txt'
+//        exclude 'META-INF/NOTICE'
+//        exclude 'META-INF/LICENSE'
+//        exclude 'META-INF/DEPENDENCIES'
+//        exclude 'META-INF/notice.txt'
+//        exclude 'META-INF/license.txt'
+//        exclude 'META-INF/dependencies.txt'
+//        exclude 'META-INF/LGPL2.1'
+    }
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false //混淆选项
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {//编译选项,设置编译版本为1.8,标记生成版本为1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    sourceSets {//设置源码目录,调整清单文件,java文件,jni文件等路径,生成类似eclipse-adt的目录结构
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    productFlavors {
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        //使用自定义sdk,源码jar包等作为首要启动项,类似Eclipse UserLibrary
+        options.compilerArgs.add('-Xbootclasspath/p' +
+                ':library/sysLibs/framework_base.jar;'// :module名称加上jar包名称,分好分隔,不支持*号通配符
+                + ':library/sysLibs/framework.jar'
+        )
+    }
+}
+dependencies {
+    provided fileTree(include: ['*.jar'], dir: 'sysLibs')//引用依赖但不编译依赖,只支持jar包
+    compile fileTree(dir: 'libs',//编译依赖jar包,include为加载项,exclude为不参与编译的过滤列表(支持*号通配符),为达到AS,Eclipse双向支持,以避免dex class重复编译的问题
+            exclude: [
+                    'android-support*.jar',
+                    'gson*.jar',
+                    'recyclerview*.jar',
+                    'appcompat*.jar',
+                    'gprinter*.jar',
+                    'rx*.jar'
+            ]
+            , include: ['*.jar']
+    )
+
+    testCompile 'junit:junit:4.12'
+    //noinspection GradleDynamicVersion,GradleDynamicVersion
+    compile 'com.android.support:appcompat-v7:24+'
+    //noinspection GradleDynamicVersion,GradleDynamicVersion
+    compile 'com.android.support:recyclerview-v7:24+'
+
+    //编译RxJava
+    //noinspection GradleDynamicVersion
+    compile 'io.reactivex:rxjava:1+'
+    //编译RxAndroid
+    //noinspection GradleDynamicVersion
+    compile 'io.reactivex:rxandroid:1+'
+    //编译Retrofit及其相关库，包括Gson
+    //noinspection GradleDynamicVersion
+    compile 'com.squareup.retrofit:retrofit:2+'
+    //noinspection GradleDynamicVersion
+    compile 'com.squareup.retrofit:converter-gson:2+'
+    //noinspection GradleDynamicVersion
+    compile 'com.squareup.retrofit:adapter-rxjava:2+'
+    //noinspection GradleDynamicVersion
+    compile 'com.google.code.gson:gson:2+'
+//    compile project(':MyDaoGenerator')
+}

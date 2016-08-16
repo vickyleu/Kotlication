@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">MposPlugin</string>
+
+    <string name="commandId">commandId</string>
+    <string name="voucherNo">voucherNo</string>
+    <string name="sn">sn</string>
+    <string name="body">body</string>
+    <string name="tradeDate">tradeDate</string>
+    <string name="tradeTime">tradeTime</string>
+    <string name="referenceNo">referenceNo</string>
+    <string name="signImage">signImage</string>
+    <string name="Public">bankPublic</string>
+    <string name="amount">amount</string>
+    <string name="startTime">startTime</string>
+    <string name="endTime">endTime</string>
+    <string name="pageSize">pageSize</string>
+    <string name="pageIndex">pageIndex</string>
+    <string name="transType">transType</string>
+    <string name="mainKey">mainKey</string>
+    <string name="write">write</string>
+    <string name="database">database</string>
+
+
+    <string name="usb_device">USB devices</string>
+    <string name="vendor_id">Vendor Id:</string>
+    <string name="product_id">Product Id:</string>
+    <string name="update">Update</string>
+    <string name="data_empty">Data can not be empty</string>
+    <string name="print">Print</string>
+    <string name="no_printer">No printer</string>
+    <string name="data_to_print">Input data to print ...</string>
+    <string name="data_too_large">Data too large, the size must less than 16KB per time</string>
+    <string name="command_hint">Input command(hex)...</string>
+    <string name="send_command">Send command</string>
+    <string name="print_image">Print image</string>
+    <string name="print_bar_code">Print bar code</string>
+    <string name="sign">签到</string>
+    <string name="pkgName">pkgName</string>
+    <string name="verName">verName</string>
+    <string name="verCode">verCode</string>
+    <string name="merId">merId</string>
+    <string name="reqNode">reqNode</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <!-- 注册 -->
+    <color name="custom_blue">#00a7ed</color>
+    <color name="form_title_color">#666768</color>
+    <color name="form_content_color">#353535</color>
+    <color name="form_line_color">#f5f5f5</color>
+    <color name="dialog_line_color">#e6e6e5</color>
+    <color name="white">#ffffff</color>
+    <color name="menu_bg">#ff3a3c42</color>
+    <color name="dialog_green_btn">#00ab69</color>
+    <color name="dialog_green_btn_press">#2c7659</color>
+    <color name="dialog_gray_btn">#616472</color>
+    <color name="dialog_gray_btn_press">#313339</color>
+
+    <color name="consume_normal">#FC4B60</color>
+    <color name="consume_pressed">#f53349</color>
+    <color name="consume_undo_normal">#0FD1D7</color>
+    <color name="consume_undo_pressed">#09bec3</color>
+    <color name="query_balance_normal">#A679FE</color>
+    <color name="query_balance_pressed">#9566ef</color>
+    <color name="e_cash_normal">#FDBB2D</color>
+    <color name="e_cash_press">#f5af12</color>
+    <color name="pre_auth_normal">#52A0FE</color>
+    <color name="pre_auth_pressed">#3892ff</color>
+    <color name="more_normal">#B3C0C9</color>
+    <color name="more_pressed">#a2b7c7</color>
+    <color name="tipsColor">#3f4242</color>
+</resources>

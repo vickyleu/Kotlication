@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        applicationId "com.esapos.mposplugin"
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+//        androidTest.setRoot('tests/androidTest/')
+        def andStr = "tests/androidTest/"
+        androidTest {
+            java.srcDirs = [andStr + 'src']
+            resources.srcDirs = [andStr + 'src']
+            aidl.srcDirs = [andStr + 'src']
+            renderscript.srcDirs = [andStr + 'src']
+            res.srcDirs = [andStr + 'res']
+            assets.srcDirs = [andStr + 'assets']
+        }
+        def testStr = "tests/test/"
+        test {
+            java.srcDirs = [testStr + 'src']
+            resources.srcDirs = [testStr + 'src']
+            aidl.srcDirs = [testStr + 'src']
+            renderscript.srcDirs = [testStr + 'src']
+            res.srcDirs = [testStr + 'res']
+            assets.srcDirs = [testStr + 'assets']
+        }
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    productFlavors {
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    compile project(':library')
+    compile 'com.android.support:appcompat-v7:24.1.1'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile "org.jetbrains.anko:anko-sdk15:$anko_version" // So here it's 15 too
+
+    // Anko libs matching support libs
+    compile "org.jetbrains.anko:anko-support-v4:$anko_version"
+    compile "org.jetbrains.anko:anko-percent:$anko_version"
+    compile "org.jetbrains.anko:anko-cardview-v7:$anko_version"
+    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+    compile "org.jetbrains.anko:anko-design:$anko_version"
+    compile "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
+}
+repositories {
+    jcenter()
+    mavenCentral()
+
+}
